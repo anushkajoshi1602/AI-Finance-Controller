@@ -1,0 +1,5 @@
+source,transaction_id,anomaly_type,amount_difference,severity
+Payment Reconciliation,p00001,Mismatch,100.0,High
+Payment Reconciliation,p00002,Missing Settlement,,High
+Bank Reconciliation,S00001,Amount Mismatch,50.0,High
+Bank Reconciliation,S00002,Missing Bank Transaction,,High

@@ -1,0 +1,9 @@
+# Backend dependencies (versions match the existing venv at Stage 1).
+fastapi==0.143.1
+uvicorn==0.54.0
+pandas==3.0.5
+python-dotenv==1.2.4
+google-genai==2.30.0
+httpx==0.28.1
+python-multipart>=0.0.9,<1.0
+SQLAlchemy>=2.0,<2.1

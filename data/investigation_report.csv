@@ -1,0 +1,57 @@
+source,transaction_id,anomaly_type,amount_difference,severity,ai_investigation
+Payment Reconciliation,p00001,Mismatch,100.0,High,"### 1. Explanation of the Discrepancy
+A reconciliation mismatch was detected for transaction ID `p00001` within the Payment Reconciliation source, showing an amount difference of 100.0. 
+
+*Missing Information:* The provided data does not specify the currency, the direction of the variance (whether it is an overage of +100.0 or a shortage of -100.0), the original expected amount, or the actual processed amount.
+
+---
+
+### 2. Possible Causes
+*(Note: These are unverified possibilities based on standard reconciliation mismatches)*
+* **Possibility 1: Processing or Data Entry Error** – A manual entry error, transposition, or system processing glitch may have altered the recorded figure by 100.0.
+* **Possibility 2: Unaccounted Fees or Adjustments** – An unrecorded transaction fee, processing charge, tax, or discount totaling 100.0 may have been applied by the payment channel.
+* **Possibility 3: Partial or Split Payment** – The transaction may have been partially settled or split across multiple entries, leaving an outstanding balance of 100.0.
+* **Possibility 4: Timing or Settlement Difference** – A secondary adjustment or refund related to `p00001` might not have posted concurrently.
+
+---
+
+### 3. Recommended Verification Steps
+1. **Retrieve Source Documentation:** Pull the internal order/invoice record and the corresponding payment processor or bank statement for transaction ID `p00001`.
+2. **Determine Direction and Currency:** Confirm the relevant currency and identify whether the 100.0 variance represents an underpayment or an overpayment.
+3. **Compare Line-Item Amounts:** Match the expected baseline amount against the actual settled amount to identify where the 100.0 variance originated.
+4. **Inspect Transaction Logs:** Check the audit logs of `p00001` for any fees, discounts, partial refunds, or related transaction IDs that account for the 100.0 difference.
+
+---
+
+### 4. Severity
+* **Rating:** **High**
+* **Reason:** The provided record explicitly designates the anomaly as ""High"" severity, and an unexplained variance of 100.0 requires prompt investigation to ensure ledger integrity."
+Payment Reconciliation,p00002,Missing Settlement,,High,"AI investigation failed: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+Bank Reconciliation,S00001,Amount Mismatch,50.0,High,"AI investigation failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-3.8-flash\nPlease retry in 57.092716624s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.8-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '57s'}]}}"
+Bank Reconciliation,S00002,Missing Bank Transaction,,High,"### 1. Explanation of the Discrepancy
+Transaction `S00002` has been flagged during bank reconciliation as a ""Missing Bank Transaction."" This indicates that an internal record exists for this transaction ID, but the corresponding entry is absent from the bank records. 
+
+*Missing Information:* The exact monetary value is unavailable (`amount_difference: nan`), and there are no transaction dates, descriptions, or account details provided in the record.
+
+---
+
+### 2. Possible Causes
+* **Possibility — Timing Difference:** The transaction was initiated and recorded internally, but has not yet cleared the banking institution (e.g., an outstanding check, in-transit deposit, or pending electronic transfer).
+* **Possibility — Bank Processing Failure:** The transaction was rejected, cancelled, or returned by the bank, but the internal ledger was not updated.
+* **Possibility — Data Import/Integration Error:** The bank statement or bank feed import omitted the transaction due to a transmission or synchronization error.
+* **Possibility — Reference Mismatch:** The transaction cleared the bank, but under an unlinked reference number, preventing automated matching.
+
+---
+
+### 3. Recommended Verification Steps
+1. **Retrieve Internal Details:** Look up transaction `S00002` in the internal accounting ledger/ERP to identify the missing amount, transaction date, payment method, and counterparty.
+2. **Review Bank Statements:** Manually search recent bank statements (including dates shortly before and after the recorded date) for the identified amount to see if it cleared under a different reference.
+3. **Check Bank Status:** Verify with the financial institution or payment processor whether any transactions matching these details were rejected, returned, or placed on hold.
+4. **Audit Data Ingestion:** Confirm that the bank data feed for that reconciliation period imported completely without gaps or dropped records.
+
+---
+
+### 4. Severity
+**High** 
+
+**Reason:** The system categorizes this anomaly as High severity. However, because the actual amount is missing (`nan`), the exact financial exposure cannot be fully quantified until internal records for `S00002` are inspected."
