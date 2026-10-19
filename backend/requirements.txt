@@ -9,3 +9,4 @@ python-multipart>=0.0.9,<1.0
 SQLAlchemy>=2.0,<2.1
 PyJWT
 pwdlib[argon2]
+email-validator
